@@ -1,2 +1,3 @@
-# moger
-Developer Tool for deploying applications to AWS
+## Development
+
+`poetry run python moger/main.py`
