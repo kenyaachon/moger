@@ -1,0 +1,10 @@
+name: "Python Tests"
+description: "Run pytest with poetry"
+runs:
+  using: "composite"
+  steps:
+    - name: Run pytest
+      shell: bash
+      run: |
+        set -eux
+        poetry run pytest
