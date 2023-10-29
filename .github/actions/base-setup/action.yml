@@ -1,0 +1,22 @@
+name: "Moger CLI Project base setup"
+description: "Setup base environment"
+runs:
+  using: "composite"
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        version: 1.6.1
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+
+    - name: Install Project Dependencies
+      shell: bash
+      run: |
+        set -eux
+        poetry install

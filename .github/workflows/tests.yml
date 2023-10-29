@@ -1,0 +1,35 @@
+name: Tests
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint and Format Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Create base setup
+        uses: ./.github/actions/base-setup
+      - name: Lint Project
+        shell: bash
+        run: |
+          poetry run black .
+          poetry run mypy .
+  test:
+    name: Run Python Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.10"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Create base setup
+        uses: ./.github/actions/base-setup
+      - name: Run Unit Tests
+        uses: ./.github/actions/tests
